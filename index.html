@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insight Engine | AI 전략 시뮬레이터</title>
+    <meta name="description" content="AI 기반 전략적 사고 시뮬레이터. 제1원칙, 비대칭 전략, 시스템 사고로 실전 솔루션을 생성합니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="logo">INSIGHT ENGINE <span class="version">v2.0</span></div>
+            <nav>
+                <span id="status-dot" class="status-dot"></span>
+                <span id="status-text">API KEY REQUIRED</span>
+            </nav>
+        </header>
+
+        <!-- Phase 0: API Key Setup -->
+        <section id="setup-screen" class="screen active">
+            <div class="hero">
+                <div class="hero-icon">🔑</div>
+                <h1>Gemini AI 엔진 연결</h1>
+                <p>전략 시뮬레이터를 가동하려면 Google Gemini API 키가 필요합니다.</p>
+            </div>
+            <div class="glass-card narrow">
+                <label for="api-key-input">Gemini API Key</label>
+                <input type="password" id="api-key-input" placeholder="AIzaSy..." autocomplete="off">
+                <p class="hint">키는 브라우저 로컬 스토리지에만 저장되며 외부로 전송되지 않습니다.</p>
+                <button id="connect-btn" class="primary-btn">엔진 연결</button>
+                <div class="divider"></div>
+                <a href="https://aistudio.google.com/apikey" target="_blank" class="link-btn">→ Google AI Studio에서 무료 키 발급받기</a>
+            </div>
+        </section>
+
+        <!-- Phase 1: Problem Input -->
+        <section id="problem-screen" class="screen">
+            <div class="hero">
+                <div class="hero-icon">🎯</div>
+                <h1>해결하고 싶은 문제를 입력하십시오.</h1>
+                <p>개인적 고민부터 실무 전략까지, AI가 최적의 사고법을 자동 선택합니다.</p>
+            </div>
+            <div class="glass-card narrow">
+                <textarea id="problem-input" rows="6" placeholder="예: 경쟁사보다 자본이 적은 상태에서 시장 점유율을 뺏어오고 싶다.&#10;예: 팀 내 정치적 갈등이 프로젝트 진행을 막고 있다.&#10;예: 연봉 협상에서 최대한 유리한 위치를 잡고 싶다."></textarea>
+                <button id="analyze-btn" class="primary-btn">
+                    <span class="btn-text">AI 분석 시작</span>
+                    <span class="btn-loading" style="display:none;">
+                        <span class="spinner"></span> 최적 사고법 분석 중...
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Phase 2: AI Questions -->
+        <section id="questions-screen" class="screen">
+            <div class="lens-badge" id="selected-lens-badge">
+                <span class="lens-icon"></span>
+                <span class="lens-name"></span>
+                <span class="lens-score"></span>
+            </div>
+            <div class="hero compact">
+                <h1 id="phase2-title">핵심 정보를 수집합니다.</h1>
+                <p id="phase2-subtitle">전략 수립에 필요한 소스를 확보하겠습니다.</p>
+            </div>
+            <div class="glass-card narrow">
+                <div class="progress-bar"><div class="progress-fill" id="q-progress"></div></div>
+                <div id="ai-questions-container">
+                    <!-- AI가 생성한 질문들이 동적으로 렌더링됨 -->
+                </div>
+                <button id="generate-btn" class="primary-btn">
+                    <span class="btn-text">전략 보고서 생성</span>
+                    <span class="btn-loading" style="display:none;">
+                        <span class="spinner"></span> AI가 전략을 설계 중...
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Phase 3: Strategy Report -->
+        <section id="report-screen" class="screen">
+            <div class="hero compact">
+                <div class="hero-icon">📋</div>
+                <h1>전략 리포트</h1>
+                <p>시스템적 사고로 도출된 당신의 전략입니다.</p>
+            </div>
+
+            <!-- Score Dashboard -->
+            <div class="score-dashboard" id="score-dashboard">
+                <!-- 동적으로 생성 -->
+            </div>
+
+            <!-- Report Body -->
+            <div class="glass-card report-card" id="report-body">
+                <!-- AI가 생성한 전략 보고서 -->
+            </div>
+
+            <div class="action-footer">
+                <button id="restart-btn" class="secondary-btn">새로운 문제 분석</button>
+                <button id="copy-btn" class="primary-btn">📋 리포트 복사</button>
+            </div>
+        </section>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay" style="display:none;">
+            <div class="loading-content">
+                <div class="loading-spinner-large"></div>
+                <p id="loading-message">AI 전략 엔진 가동 중...</p>
+            </div>
+        </div>
+
+        <div class="background-effects">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
